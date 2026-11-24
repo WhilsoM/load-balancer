@@ -1,6 +1,6 @@
 use std::sync::Arc;
 
-use axum::{Json, Router, extract::State, http::StatusCode, routing::get};
+use axum::{Json, Router, extract::State, routing::get};
 use serde_json::{Value, json};
 
 struct AppState {
@@ -28,6 +28,6 @@ async fn get_name(State(state): State<Arc<AppState>>) -> Json<Value> {
     Json(json!({ "name": state.name }))
 }
 
-async fn health() -> (StatusCode, &'static str) {
-    (StatusCode::OK, "OK")
+async fn health() -> Json<Value> {
+    Json(json!({ "message": "OK" }))
 }
